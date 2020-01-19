@@ -88,7 +88,7 @@
 		if($resid) {
 		$user_id = $_SESSION['user_id'];
 		$query = "insert into status_here (status,user_id,timestamp,future_use) values ('$status',$user_id,NOW(),NULL)";
-		$qwer = MySQLi_Query($resid,$query);
+		$qwer = MySQL_Query($resid,$query);
 		if($qwer) {
 			?>
 			<script type="text/javascript" src="notify.js"></script>
@@ -116,9 +116,9 @@
 				//Displaying past statuses
 			if($resid) {
 				$query1 = "select status,time_format(timestamp,'%l:%i:%s %p') as time,date_format(timestamp,'%D of %M,%Y') as date from status_here where user_id = $user_id order by id desc";
-				$result = MySQLi_Query($resid,$query1);
+				$result = MySQL_Query($resid,$query1);
 				$f=1;
-				while(($rows=MySQLi_Fetch_Row($result))==True) {
+				while(($rows=MySQL_Fetch_Row($result))==True) {
 				$f++;
 				if($f==2) {
 				echo "<tr align='center'> <td colspan='5'>Your statuses till now:-</td> </tr> <tr align='center'> <td colspan='5'><table align='center' align='center' cellspacing='5' cellpadding='5' width='100%' style='table-layout:fixed'> <col style='width:25%'> <col style='width:25%'>  <col style='width:25%'>";
@@ -132,7 +132,7 @@
 				
 				echo "</table>";
 			}
-			MySQLi_Close($resid);
+			MySQL_Close($resid);
 		}
 		
 		?>

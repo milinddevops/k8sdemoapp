@@ -137,28 +137,28 @@
 			//$query="INSERT INTO studs VALUES('$name','$email',$age);";
 		//MySQL Magic :D
 			//Getting Resource ID
-			$res_id=MySQLi_Connect('localhost','root','@connectme','shangout');
-			if(MySQLi_Connect_Errno()) {
+			$res_id=MySQL_Connect('localhost','root','@connectme','shangout');
+			if(MySQL_Connect_Errno()) {
 				echo "<tr align='center'> <td colspan='5'> Failed to connect to MySQL </td> </tr>";
 			}
 			else {
-			$check_email=MySQLi_Query($res_id,"select name from students where email='".$email."'");
-			$r_email=MySQLi_Fetch_Row($check_email);
+			$check_email=MySQL_Query($res_id,"select name from students where email='".$email."'");
+			$r_email=MySQL_Fetch_Row($check_email);
 			
 			if($r_email) {
 				echo "<tr align='center'> <td colspan='5'> <font color='red'> Email already Registered, Registration Failed!  </font>  </td> </tr>";
 			}
 			
 			else {
-			$count=MySQLi_Query($res_id,"select (max(id)+1) as count  from students");
-			$count_id=MySQLi_Fetch_Assoc($count);
+			$count=MySQL_Query($res_id,"select (max(id)+1) as count  from students");
+			$count_id=MySQL_Fetch_Assoc($count);
 			if($count_id["count"]) {
 				$query="insert into students values (".$count_id["count"].",'$name','$email',$age,'$gender','$password')";
 			}
 			else {
 				$query="insert into students values (1,'$name','$email',$age,'$gender','$password')";
 			}
-			$res=MySQLi_Query($res_id,$query);
+			$res=MySQL_Query($res_id,$query);
 			if($res) {
 			echo "<tr align='center'> <td colspan='5'> <font color='green'> Registration Successful! </font> You may login now from here:- <a href='login.php'>Login</a></td> </tr>";
 			}
@@ -166,7 +166,7 @@
 				echo "<tr align='center'> <td colspan='5'> <font color='red'> Registration Failed! </font> </td> </tr>";
 			}
 			}
-			MySQLi_Close($res_id);
+			MySQL_Close($res_id);
 			}
 			
 			
