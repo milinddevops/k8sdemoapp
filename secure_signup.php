@@ -139,6 +139,8 @@
 			//Getting Resource ID
 			$res_id=MySQL_Connect('localhost','root','@connectme','shangout');
 			if(MySQL_Connect_Errno()) {
+                                echo mysql_errno($res_id) . ": " . mysql_error($res_id). "\n";
+                                exit;
 				echo "<tr align='center'> <td colspan='5'> Failed to connect to MySQL </td> </tr>";
 			}
 			else {
