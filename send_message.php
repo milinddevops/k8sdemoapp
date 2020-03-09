@@ -102,19 +102,19 @@
 				}
 				$email=sec($_POST["n1"]);
 				$text=sec($_POST["t1"]);
-				$resid=MySQL_Connect('localhost','root','@connectme','shangout');
-					if(MySQL_Connect_Errno()) {
+				$resid=MySQLi_Connect($_ENV['DB_HOST'],$_ENV['DB_USER'],$_ENV['DB_PASSWORD'],$_ENV['DB_NAME']);
+					if(MySQLi_Connect_Errno()) {
 						echo "<tr align='center'> <td colspan='5'> Failed to connect to MySQL </td> </tr>";
 					}
 					else {
-						$count=MySQL_Query($resid,"select id from students where email='".$email."'");
-						$count_id=MySQL_Fetch_Assoc($count);
+						$count=MySQLi_Query($resid,"select id from students where email='".$email."'");
+						$count_id=MySQLi_Fetch_Assoc($count);
 						if($count_id) {
 						$receiver=$count_id["id"];
 						$sender=$_SESSION["user_id"];
 						
-						$count=MySQL_Query($resid,"select (max(id)+1) as count  from messages");
-						$count_id=MySQL_Fetch_Assoc($count);
+						$count=MySQLi_Query($resid,"select (max(id)+1) as count  from messages");
+						$count_id=MySQLi_Fetch_Assoc($count);
 						
 						if($count_id["count"]) {
 						$query="insert into messages values (".$count_id["count"].",".$sender.",".$receiver.",'$text')";
@@ -123,7 +123,7 @@
 						$query="insert into messages values (1,".$sender.",".$receiver.",'$text')";
 						}
 						
-						$res=MySQL_Query($resid,$query);
+						$res=MySQLi_Query($resid,$query);
 						
 						if($res) {
 							?>
@@ -145,7 +145,7 @@
 						else {
 							echo "<tr align='center'> <td colspan='5'> <font color='red'> Sorry, User does not exists! </font> </td> </tr>";
 						}
-						MySQL_Close($resid);
+						MySQLi_Close($resid);
 					}
 			
 			}

@@ -63,14 +63,14 @@
 		    $password=$_POST["p1"];
 			}
 			$query="select * from students where email='$email' and password='$password'";
-			$resid=MySQL_Connect('localhost','root','@connectme','shangout');
-			if(MySQL_Connect_Errno()) {
+			$resid=MySQLi_Connect($_ENV['DB_HOST'],$_ENV['DB_USER'],$_ENV['DB_PASSWORD'],$_ENV['DB_NAME']);
+			if(MySQLi_Connect_Errno()) {
 				echo "<tr align='center'> <td colspan='5'> Failed to connect to MySQL </td> </tr>";
 			}
 			else {
-				$result=MySQL_Query($resid,$query);
+				$result=MySQLi_Query($resid,$query);
 				
-				$array=MySQL_Fetch_Assoc($result);
+				$array=MySQLi_Fetch_Assoc($result);
 					if($array) {
 						//Session_start();
 						$_SESSION["user_id"] = $array["id"]; 
@@ -107,19 +107,19 @@
 				
 						echo "<table  cellpadding='4' cellspacing='5' width='100%' style='table-layout:fixed'> <col width='100%'> <tr align='centre'> <th> <h3> Updates from your Friends: </h3> </th> </tr> ";
 				
-						$count = MySQL_Query($resid,"select frnd_two_id from are_friends where frnd_one_id = $user_here union select frnd_one_id from are_friends where frnd_two_id = $user_here");
+						$count = MySQLi_Query($resid,"select frnd_two_id from are_friends where frnd_one_id = $user_here union select frnd_one_id from are_friends where frnd_two_id = $user_here");
 						if($count) {
 						$f=1;
-						while(($rows=MySQL_Fetch_Row($count))==True) {
+						while(($rows=MySQLi_Fetch_Row($count))==True) {
 							$f=2;
 							$query = "select status,time_format(timestamp,'%l:%i:%s %p') as time,date_format(timestamp,'%D of %M,%Y') as date from status_here where user_id = $rows[0] order by id desc";
 							$queryx = "select name from students where id = $rows[0]";
-							$result = MySQL_Query($resid,$query);
-							$result1 = MySQL_Query($resid,$queryx);
-							$name_here =MySQL_Fetch_Row($result1);
+							$result = MySQLi_Query($resid,$query);
+							$result1 = MySQLi_Query($resid,$queryx);
+							$name_here =MySQLi_Fetch_Row($result1);
 							if($result) {
 
-										while(($rows1=MySQL_Fetch_Row($result))==True) {
+										while(($rows1=MySQLi_Fetch_Row($result))==True) {
 											
 											echo "<tr> <td> <font style='color:blue'>$name_here[0]: </font> </td> </tr>";
 											echo "<tr> <td style='word-wrap:break-word'> $rows1[0] </td> </tr>";
@@ -146,7 +146,7 @@
 					else {
 						echo "<tr align='center'> <td colspan='5'> <font color='red'> Login Failed! </font> Make sure you input your email and password correctly and login again:- <a href='login.php'>Login</a> </td> </tr>";
 					}
-			MySQL_Close($resid);
+			MySQLi_Close($resid);
 			}
 		
 		?>	

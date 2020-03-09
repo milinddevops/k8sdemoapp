@@ -66,16 +66,16 @@
 			if(IsSet($_SESSION["user_id"])) {
 					$id=$_SESSION["user_id"];
 					$query="select friend_name,friend_id from friends where receiver_id=".$id." and status=0 and comp=0";
-					$res_id=MySQL_Connect('localhost','root','@connectme','shangout');
+					$res_id=MySQLi_Connect($_ENV['DB_HOST'],$_ENV['DB_USER'],$_ENV['DB_PASSWORD'],$_ENV['DB_NAME']);
 				
-					if(MySQL_Connect_Errno()) {
+					if(MySQLi_Connect_Errno()) {
 						echo "<tr align='center'> <td colspan='5'> Failed to connect to MySQL </td> </tr>";
 					}
 					else {
-						$result=MySQL_Query($res_id,$query);
+						$result=MySQLi_Query($res_id,$query);
 						if($result==true) {
 							$f=1;
-							while(($rows=MySQL_Fetch_Row($result))==True) {
+							while(($rows=MySQLi_Fetch_Row($result))==True) {
 							$f++;
 							if($f==2) {
 							echo "<tr align='center'> <td colspan='5'>Friend Requests:-</td> </tr>";
@@ -94,7 +94,7 @@
 							echo "<tr align='center'> <td colspan='5'><font color='lightblue'> No Friend Requests!</font> </td> </tr>";
 						}
 						
-						MySQL_Close($res_id);	
+						MySQLi_Close($res_id);	
 					}
 				
 			}

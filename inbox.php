@@ -33,18 +33,18 @@
 			if(IsSet($_SESSION["user_id"])) {
 				$id=$_SESSION["user_id"];
 				$query="select * from messages where receiver_id=".$id." order by id desc";
-				$res_id=MySQL_Connect('localhost','root','@connectme','shangout');
+				$res_id=MySQLi_Connect($_ENV['DB_HOST'],$_ENV['DB_USER'],$_ENV['DB_PASSWORD'],$_ENV['DB_NAME']);
 				
-				if(MySQL_Connect_Errno()) {
+				if(MySQLi_Connect_Errno()) {
 					echo "<tr align='center'> <td colspan='5'> Failed to connect to MySQL </td> </tr>";
 				}
 				else {
-				$result=MySQL_Query($res_id,$query);
-				$data=MySQL_Fetch_Row($result);
+				$result=MySQLi_Query($res_id,$query);
+				$data=MySQLi_Fetch_Row($result);
 				if($data) {
 				$query="select name,email from students where id=".$data[1]."";
-				$sender=MySQL_Query($res_id,$query);
-				$sender=MySQL_Fetch_Row($sender);
+				$sender=MySQLi_Query($res_id,$query);
+				$sender=MySQLi_Fetch_Row($sender);
 				//if($data) {
 				 
 				echo "<tr align='center'> <td colspan='5'> <table cellpadding='4' cellspacing='5' width='100%' style='table-layout:fixed'> <col width='100%'> ";
@@ -56,7 +56,7 @@
 				else {
 				echo "<tr align='center'> <td colspan='5'> <font color='lightblue'> No Messages! </font> </td> </tr>";
 				}
-				MySQL_Close($res_id);
+				MySQLi_Close($res_id);
 				}
 			}
 			else {

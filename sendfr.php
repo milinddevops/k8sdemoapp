@@ -8,20 +8,20 @@ $frnd_name=$_SESSION["name"];
 
 
 
-			$res_id=MySQL_Connect('localhost','root','@connectme','shangout');
-			if(MySQL_Connect_Errno()) {
+			$res_id=MySQLi_Connect($_ENV['DB_HOST'],$_ENV['DB_USER'],$_ENV['DB_PASSWORD'],$_ENV['DB_NAME']);
+			if(MySQLi_Connect_Errno()) {
 				echo "<tr align='center'> <td colspan='5'> Failed to connect to MySQL </td> </tr>";
 			}
 			else {
-				$count=MySQL_Query($res_id,"select (max(id)+1) as count from friends");
-				$count_id=MySQL_Fetch_Assoc($count);
+				$count=MySQLi_Query($res_id,"select (max(id)+1) as count from friends");
+				$count_id=MySQLi_Fetch_Assoc($count);
 				if($count_id["count"]) {
 				$query="insert into friends values (".$count_id["count"].",'$recv_id','$recv_name',$frnd_id,'$frnd_name',0,0)"; //Query fired in this way>>> insert into friends values(1,1,'Kunal',2,'Tron',0,0);
 				}
 				else {
 				$query="insert into friends values (1,'$recv_id','$recv_name',$frnd_id,'$frnd_name',0,0)";
 				}
-				$res=MySQL_Query($res_id,$query);
+				$res=MySQLi_Query($res_id,$query);
 				
 				if($res) {
 			     echo "Successful!";
@@ -29,7 +29,7 @@ $frnd_name=$_SESSION["name"];
 			else {
 				 echo "Failed!";
 			}
-				MySQL_Close($res_id);
+				MySQLi_Close($res_id);
 			}
 
 }

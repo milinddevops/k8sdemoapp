@@ -34,21 +34,21 @@
 	if($resid) {
 	
 	
-	$count = MySQL_Query($resid,"select frnd_two_id from are_friends where frnd_one_id = $user_id union select frnd_one_id from are_friends where frnd_two_id = $user_id");
+	$count = MySQLi_Query($resid,"select frnd_two_id from are_friends where frnd_one_id = $user_id union select frnd_one_id from are_friends where frnd_two_id = $user_id");
 	
 	echo "<tr align='center'> <td colspan='5'>Your Friends:- </td> </tr> <tr align='center'> <td colspan='5'><table align='center' >";
 	
 	echo " <table align='center' cellspacing='5' cellpadding='5'> 
 				<tr> <th> Name: </th> <th> Email: </th> <th> Gender: </th> </tr>";
 				
-	while(($rows=MySQL_Fetch_Row($count))==True) {
+	while(($rows=MySQLi_Fetch_Row($count))==True) {
 
 	$query = "select name,email,gender from students where id = $rows[0] ";
-	$result = MySQL_Query($resid,$query);
+	$result = MySQLi_Query($resid,$query);
 
 	if($result) {
 
-				while(($rows=MySQL_Fetch_Row($result))==True) {
+				while(($rows=MySQLi_Fetch_Row($result))==True) {
 
 
 
