@@ -33,7 +33,7 @@ pipeline {
 
 def init() {
   env.IMAGE_NAME = 'milinddocker/demo:hangout_' + env.BUILD_ID
-  env.REGISTRY_URL = 'https://hub.docker.com'
+  env.REGISTRY_URL = 'https://docker.io'
 }
 
 def buildAndRegisterApplicationImage() {
