@@ -66,7 +66,7 @@
 			if(IsSet($_SESSION["user_id"])) {
 					$id=$_SESSION["user_id"];
 					$query="select friend_name,friend_id from friends where receiver_id=".$id." and status=0 and comp=0";
-					$res_id=MySQLi_Connect($_ENV['DB_HOST'],$_ENV['DB_USER'],$_ENV['DB_PASSWORD'],$_ENV['DB_NAME']);
+					$res_id=MySQLi_Connect(getenv('DB_HOST'),getenv('DB_USER'),getenv('DB_PASSWORD'),getenv('DB_NAME'));
 				
 					if(MySQLi_Connect_Errno()) {
 						echo "<tr align='center'> <td colspan='5'> Failed to connect to MySQL </td> </tr>";
