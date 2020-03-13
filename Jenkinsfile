@@ -39,7 +39,7 @@ def init() {
 def buildAndRegisterApplicationImage() {
   def buildResult
 
-  docker.withRegistry('', DockerHubCredentials) {
+  docker.withRegistry(env.REGISTRY_URL, 'DockerHubCredentials') {
     buildResult = docker.build(env.IMAGE_NAME)
     buildResult.push()
   }
