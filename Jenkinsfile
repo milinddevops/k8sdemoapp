@@ -4,10 +4,7 @@ pipeline {
   stages {
 
    stage ('Init') {
-    steps {
-      env.IMAGE_NAME = 'demo:hangout_' + env.BUILD_ID
-      env.REGISTRY_URL = 'milinddocker/demo'
-    }
+    steps { init() }
    }
 
    stage ('Build') {
@@ -33,6 +30,11 @@ pipeline {
 // ============================================================================
 // Build steps
 // ============================================================================
+
+def init() {
+  env.IMAGE_NAME = 'demo:hangout_' + env.BUILD_ID
+  env.REGISTRY_URL = 'milinddocker/demo'
+}
 
 def buildAndRegisterApplicationImage() {
   def buildResult
