@@ -20,7 +20,7 @@ pipeline {
    }
 
    stage ('Deploy on staging'){
-    agent
+    agent { label 'kubectlpod' }
     steps {
       deployOnStage()
     }
