@@ -9,13 +9,13 @@ pipeline {
 
    stage ('Build Image') {
     steps {
-      // buildApplicationImage()
+      buildApplicationImage()
     }
    }
 
    stage ('Register Image') {
     steps {
-      // registerApplicationImage()
+      registerApplicationImage()
     }
    }
 
@@ -49,14 +49,15 @@ def init() {
 }
 
 def buildApplicationImage() {
-
-  docker.withRegistry(env.REGISTRY_URL, 'DockerHubCredentials') {
-    buildResult = docker.build(env.IMAGE_NAME)
-  }
+  print("Building docker image")
+  // docker.withRegistry(env.REGISTRY_URL, 'DockerHubCredentials') {
+  //  buildResult = docker.build(env.IMAGE_NAME)
+  // }
 }
 
 def registerApplicationImage() {
-  docker.withRegistry(env.REGISTRY_URL, 'DockerHubCredentials') {
-    buildResult.push()
-  }
+  print("registering application image")
+  // docker.withRegistry(env.REGISTRY_URL, 'DockerHubCredentials') {
+  //  buildResult.push()
+  // }
 }
