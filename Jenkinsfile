@@ -7,8 +7,12 @@ pipeline {
     steps { init() }
    }
 
-   stage ('Build') {
+   stage ('Build Image') {
     steps { buildAndRegisterApplicationImage() }
+   }
+
+   stage ('Register Image') {
+    steps { registerApplicationImage() }
    }
 
    stage ('Deploy on staging'){
@@ -31,16 +35,22 @@ pipeline {
 // Build steps
 // ============================================================================
 
+def buildResult
+
 def init() {
   env.IMAGE_NAME = 'milinddocker/demo:hangout_' + env.BUILD_ID
   env.REGISTRY_URL = 'https://docker.io'
 }
 
-def buildAndRegisterApplicationImage() {
-  def buildResult
+def buildApplicationImage() {
 
   docker.withRegistry(env.REGISTRY_URL, 'DockerHubCredentials') {
     buildResult = docker.build(env.IMAGE_NAME)
+  }
+}
+
+def registerApplicationImage() {
+  docker.withRegistry(env.REGISTRY_URL, 'DockerHubCredentials') {
     buildResult.push()
   }
 }
