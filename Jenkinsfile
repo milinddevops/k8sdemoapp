@@ -20,6 +20,7 @@ pipeline {
    }
 
    stage ('Deploy on staging'){
+    agent
     steps {
       deployOnStage()
     }
@@ -61,7 +62,7 @@ def registerApplicationImage() {
 }
 
 def deployOnStage() {
-  podTemplate(containers: [containerTemplate(args: '', command: '', image: 'bitnami/kubectl', livenessProbe: containerLivenessProbe(execArgs: '', failureThreshold: 0, initialDelaySeconds: 0, periodSeconds: 0, successThreshold: 0, timeoutSeconds: 0), name: 'kubectl', resourceLimitCpu: '', resourceLimitMemory: '', resourceRequestCpu: '', resourceRequestMemory: '', ttyEnabled: true, workingDir: '/home/jenkins/')], inheritFrom: '', instanceCap: 0, namespace: '', nodeSelector: '', podRetention: always(), serviceAccount: '', supplementalGroups: '', workspaceVolume: dynamicPVC(accessModes: 'ReadWriteOnce', requestsSize: '', storageClassName: ''), yaml: '') {
+  podTemplate(containers: [containerTemplate(args: '', command: '', image: 'bitnami/kubectl', livenessProbe: containerLivenessProbe(execArgs: '', failureThreshold: 0, initialDelaySeconds: 0, periodSeconds: 0, successThreshold: 0, timeoutSeconds: 0), name: 'kubectl', resourceLimitCpu: '', resourceLimitMemory: '', resourceRequestCpu: '', resourceRequestMemory: '', ttyEnabled: true, workingDir: '/home/jenkins/')], inheritFrom: '', instanceCap: 0, label: 'kubectlpod', namespace: '', nodeSelector: '', podRetention: always(), serviceAccount: '', supplementalGroups: '', workspaceVolume: dynamicPVC(accessModes: 'ReadWriteOnce', requestsSize: '', storageClassName: ''), yaml: '') {
     kubectl get all
   }
 }
