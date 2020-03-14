@@ -8,11 +8,15 @@ pipeline {
    }
 
    stage ('Build Image') {
-    steps { # buildApplicationImage() }
+    steps {
+      // buildApplicationImage()
+    }
    }
 
    stage ('Register Image') {
-    steps { # registerApplicationImage() }
+    steps {
+      // registerApplicationImage()
+    }
    }
 
    stage ('Deploy on staging'){
