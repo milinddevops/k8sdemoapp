@@ -23,6 +23,7 @@ pipeline {
     agent { label 'kubepods' }
     steps {
       sh 'kubectl get all'
+      sh 'sleep 200'
     }
    }
 
