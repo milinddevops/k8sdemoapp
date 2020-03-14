@@ -8,7 +8,7 @@ pipeline {
    }
 
    stage ('Build Image') {
-    steps { buildAndRegisterApplicationImage() }
+    steps { buildApplicationImage() }
    }
 
    stage ('Register Image') {
