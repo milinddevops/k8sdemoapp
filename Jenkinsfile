@@ -21,9 +21,7 @@ pipeline {
 
    stage ('Deploy on staging'){
     steps {
-      sh 'echo deploy on staging'
-      sh 'kubectl config use-context stage'
-      sh 'kubectl get pods'
+      deployOnStage()
     }
    }
 
@@ -60,4 +58,10 @@ def registerApplicationImage() {
   // docker.withRegistry(env.REGISTRY_URL, 'DockerHubCredentials') {
   //  buildResult.push()
   // }
+}
+
+def deployOnStage() {
+  podTemplate(containers: [containerTemplate(args: '', command: '', image: 'bitnami/kubectl', livenessProbe: containerLivenessProbe(execArgs: '', failureThreshold: 0, initialDelaySeconds: 0, periodSeconds: 0, successThreshold: 0, timeoutSeconds: 0), name: 'kubectl', resourceLimitCpu: '', resourceLimitMemory: '', resourceRequestCpu: '', resourceRequestMemory: '', ttyEnabled: true, workingDir: '/home/jenkins/')], inheritFrom: '', instanceCap: 0, namespace: '', nodeSelector: '', podRetention: always(), serviceAccount: '', supplementalGroups: '', workspaceVolume: dynamicPVC(accessModes: 'ReadWriteOnce', requestsSize: '', storageClassName: ''), yaml: '') {
+    kubectl get all
+  }
 }
