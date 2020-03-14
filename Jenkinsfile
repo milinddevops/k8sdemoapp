@@ -8,16 +8,18 @@ pipeline {
    }
 
    stage ('Build Image') {
-    steps { buildApplicationImage() }
+    steps { # buildApplicationImage() }
    }
 
    stage ('Register Image') {
-    steps { registerApplicationImage() }
+    steps { # registerApplicationImage() }
    }
 
    stage ('Deploy on staging'){
     steps {
       sh 'echo deploy on staging'
+      sh 'kubectl config use-context stage'
+      sh 'kubectl get pods'
     }
    }
 
