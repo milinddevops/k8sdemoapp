@@ -39,7 +39,7 @@ def buildResult
 
 def init() {
   env.IMAGE_NAME = 'milinddocker/demo:hangout_' + env.BUILD_ID
-  env.REGISTRY_URL = 'https://docker.io'
+  env.REGISTRY_URL = 'https://index.docker.io/v1/'
 }
 
 def buildApplicationImage() {
