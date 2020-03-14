@@ -20,8 +20,9 @@ pipeline {
    }
 
    stage ('Deploy on staging'){
+    agent { label 'kubepods' }
     steps {
-      deployOnStage()
+      sh 'kubectl get all'
     }
    }
 
