@@ -22,6 +22,7 @@ pipeline {
    stage ('Deploy on staging'){
     agent { label 'kubepods' }
     steps {
+      sh 'su deploy'
       sh 'kubectl get all'
       sh 'sleep 200'
     }
