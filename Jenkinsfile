@@ -21,7 +21,7 @@ pipeline {
 
    stage ('Deploy on staging'){
     steps {
-      sh '/usr/local/bin/kubectl set image deployment/hangoutapp hangout=milinddocker/demo:hangout_' + $BUILD_ID
+      sh '/usr/local/bin/kubectl set image deployment/hangoutapp hangout=milinddocker/demo:hangout_' + env.BUILD_ID
       sh 'sleep 200'
     }
    }
