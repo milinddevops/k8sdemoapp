@@ -14,32 +14,32 @@
 			<tr align='center' bgcolor='lightgrey' class='td_bor'>
 				<td width='5%'> <a href='home.php'> Home </a></td>
 				<td width='5%'> <a href='login.php'>Login </a></td>
-				<td width='5%'> <a href='secure_signup.php'>Sign-up </a></td> 
+				<td width='5%'> <a href='secure_signup.php'>Sign-up </a></td>
 				<td width='5%'> <a href='contact-us.html'>Contact-Us </a></td>
 				<td width='5%'> <a href='about-us.html'>About-us </a></td>
 			</tr>
-			
+
 			<tr>
-				<td> <hr> </td> 
-				<td> <hr> </td> 
-				<td> <hr> </td> 
-				<td> <hr> </td> 
-				<td> <hr> </td> 
+				<td> <hr> </td>
+				<td> <hr> </td>
+				<td> <hr> </td>
+				<td> <hr> </td>
+				<td> <hr> </td>
 			</tr>
-			
+
 			<tr>
-				
-				<td colspan='4'> 
-				<p> 
-					  <h3>Welcome to Socioexplore</h3>
-				</p>	
+
+				<td colspan='4'>
+				<p>
+					  <h3>Welcome to Socioexplore website build and deployed on kubernetes!</h3>
+				</p>
 				</td>
-				
+
 			</tr>
 
 		</table>
 			<footer align='center'>
-			&copy; All Rights Reserved.	
+			&copy; All Rights Reserved with Milind.
 			</footer>
 </body>
 </html>
