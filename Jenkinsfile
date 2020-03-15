@@ -21,7 +21,7 @@ pipeline {
 
    stage ('Deploy on staging'){
     steps {
-      sh 'kubectl get all'
+      sh '/usr/local/bin/kubectl get all'
       sh 'sleep 200'
     }
    }
